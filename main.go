@@ -4,11 +4,12 @@ import (
     "context"
     "fmt"
     "log"
-
+    "sys"
     "github.com/ericchiang/k8s"
 )
 
 func main() {
+    fmt.printf("TEST1")
     client, err := k8s.NewInClusterClient()
     if err != nil {
         log.Fatal(err)
