@@ -1,0 +1,70 @@
+hash: 53312fa6a8050908e1f717d860d4c6b6d09f3286ab59cb0308bedc2461d136a6
+updated: 2017-05-03T09:44:39.342278779-07:00
+imports:
+- name: cloud.google.com/go
+  version: 085c05ca074a8de9107005f9baa6308eae7eaf41
+  subpackages:
+  - compute/metadata
+- name: github.com/ericchiang/k8s
+  version: 929412ddf58668dc5aa49e47fa822507f048d34b
+  repo: https://github.com/ericchiang/k8s
+- name: github.com/golang/protobuf
+  version: 18c9bb3261723cd5401db4d0c9fbc5c3b6c70fe8
+  subpackages:
+  - proto
+- name: go4.org
+  version: cababa4e44509c51b2718c014b5e522659af5d1b
+  subpackages:
+  - syncutil/singleflight
+- name: golang.org/x/crypto
+  version: 04eae0b62feaaf659a0ce2c4e8dc70b6ae2fff67
+  subpackages:
+  - acme
+  - acme/autocert
+  - ssh/terminal
+- name: golang.org/x/net
+  version: feeb485667d1fdabe727840fe00adc22431bc86e
+  subpackages:
+  - context
+  - context/ctxhttp
+- name: golang.org/x/oauth2
+  version: a6bd8cefa1811bd24b86f8902872e4e8225f74c4
+  subpackages:
+  - google
+  - internal
+  - jws
+  - jwt
+- name: golang.org/x/sys
+  version: 9ccfe848b9db8435a24c424abbc07a921adf1df5
+  subpackages:
+  - unix
+- name: golang.org/x/tools
+  version: 2382e3994d48b1d22acc2c86bcad0a2aff028e32
+  subpackages:
+  - go/ast/astutil
+  - go/buildutil
+  - go/loader
+- name: google.golang.org/api
+  version: fbbaff1827317122a8a0e1b24de25df8417ce87b
+  subpackages:
+  - compute/v1
+  - gensupport
+  - googleapi
+  - googleapi/internal/uritemplates
+- name: google.golang.org/appengine
+  version: 170382fa85b10b94728989dfcf6cc818b335c952
+  subpackages:
+  - internal
+  - internal/app_identity
+  - internal/base
+  - internal/datastore
+  - internal/log
+  - internal/modules
+  - internal/remote_api
+  - internal/urlfetch
+  - urlfetch
+testImports:
+- name: golang.org/x/sync
+  version: de49d9dcd27d4f764488181bea099dfe6179bcf0
+  subpackages:
+  - errgroup

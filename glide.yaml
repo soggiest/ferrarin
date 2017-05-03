@@ -1,4 +1,1 @@
 package: github.com/soggiest/ferrarin
-import:
-  - package: github.com/ericchiang/k8s
-    version: v.0.3.0
