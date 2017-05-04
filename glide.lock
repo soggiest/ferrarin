@@ -1,5 +1,5 @@
-hash: 53312fa6a8050908e1f717d860d4c6b6d09f3286ab59cb0308bedc2461d136a6
-updated: 2017-05-03T09:44:39.342278779-07:00
+hash: 3ebc14330ce791dd30ffe3da9ec1ced5b6f8b3483bcbc4934329c459886037f5
+updated: 2017-05-04T13:00:10.386259381-07:00
 imports:
 - name: cloud.google.com/go
   version: 085c05ca074a8de9107005f9baa6308eae7eaf41
@@ -7,17 +7,60 @@ imports:
   - compute/metadata
 - name: github.com/ericchiang/k8s
   version: 929412ddf58668dc5aa49e47fa822507f048d34b
-  repo: https://github.com/ericchiang/k8s
+  subpackages:
+  - api/resource
+  - api/unversioned
+  - api/v1
+  - apis/apps/v1alpha1
+  - apis/apps/v1beta1
+  - apis/authentication/v1
+  - apis/authentication/v1beta1
+  - apis/authorization/v1
+  - apis/authorization/v1beta1
+  - apis/autoscaling/v1
+  - apis/autoscaling/v2alpha1
+  - apis/batch/v1
+  - apis/batch/v2alpha1
+  - apis/certificates/v1alpha1
+  - apis/certificates/v1beta1
+  - apis/extensions/v1beta1
+  - apis/imagepolicy/v1alpha1
+  - apis/meta/v1
+  - apis/policy/v1alpha1
+  - apis/policy/v1beta1
+  - apis/rbac/v1alpha1
+  - apis/rbac/v1beta1
+  - apis/settings/v1alpha1
+  - apis/storage/v1
+  - apis/storage/v1beta1
+  - runtime
+  - runtime/schema
+  - util/intstr
+  - watch/versioned
 - name: github.com/golang/protobuf
   version: 18c9bb3261723cd5401db4d0c9fbc5c3b6c70fe8
   subpackages:
+  - descriptor
+  - jsonpb/jsonpb_test_proto
   - proto
+  - proto/proto3_proto
+  - proto/testdata
+  - protoc-gen-go/descriptor
+  - protoc-gen-go/generator
+  - protoc-gen-go/grpc
+  - protoc-gen-go/plugin
+  - ptypes
+  - ptypes/any
+  - ptypes/duration
+  - ptypes/struct
+  - ptypes/timestamp
+  - ptypes/wrappers
 - name: go4.org
   version: cababa4e44509c51b2718c014b5e522659af5d1b
   subpackages:
   - syncutil/singleflight
 - name: golang.org/x/crypto
-  version: 04eae0b62feaaf659a0ce2c4e8dc70b6ae2fff67
+  version: 5a033cc77e57eca05bdb50522851d29e03569cbe
   subpackages:
   - acme
   - acme/autocert
@@ -25,8 +68,24 @@ imports:
 - name: golang.org/x/net
   version: feeb485667d1fdabe727840fe00adc22431bc86e
   subpackages:
+  - bpf
   - context
   - context/ctxhttp
+  - html
+  - html/atom
+  - http2
+  - http2/hpack
+  - icmp
+  - idna
+  - internal/iana
+  - internal/netreflect
+  - internal/nettest
+  - internal/timeseries
+  - ipv4
+  - ipv6
+  - lex/httplex
+  - webdav/internal/xml
+  - websocket
 - name: golang.org/x/oauth2
   version: a6bd8cefa1811bd24b86f8902872e4e8225f74c4
   subpackages:
@@ -38,6 +97,13 @@ imports:
   version: 9ccfe848b9db8435a24c424abbc07a921adf1df5
   subpackages:
   - unix
+- name: golang.org/x/text
+  version: 470f45bf29f4147d6fbd7dfd0a02a848e49f5bf4
+  subpackages:
+  - secure/bidirule
+  - transform
+  - unicode/bidi
+  - unicode/norm
 - name: golang.org/x/tools
   version: 2382e3994d48b1d22acc2c86bcad0a2aff028e32
   subpackages:
@@ -63,8 +129,10 @@ imports:
   - internal/remote_api
   - internal/urlfetch
   - urlfetch
+- name: k8s.io/client-go
+  version: e121606b0d09b2e1c467183ee46217fa85a6b672
 testImports:
 - name: golang.org/x/sync
-  version: de49d9dcd27d4f764488181bea099dfe6179bcf0
+  version: 305c7b3edb4364a58141b30686a61a87bdb79a3a
   subpackages:
   - errgroup
