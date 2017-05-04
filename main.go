@@ -18,7 +18,7 @@ func main() {
     if err != nil {
       log.Fatal(err)
     }
-    for _, pods := range pods.Items {
+    for _, pod := range pods.Items {
       fmt.Printf("%q", *pod.Metadata.Name)
     }
 }
