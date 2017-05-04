@@ -9,10 +9,11 @@ import (
 
 func main() {
     fmt.Printf("TEST1")
-    //    client, err := k8s.NewInClusterClient()
-    //    if err != nil {
-    //        log.Fatal(err)
-    //    }
+    client, err := k8s.NewInClusterClient()
+    if err != nil {
+      log.Fatal(err)
+    }
+    fmt.Printf(client)
     //
     //    nodes, err := client.CoreV1().ListNodes(context.Background())
     //    if err != nil {
