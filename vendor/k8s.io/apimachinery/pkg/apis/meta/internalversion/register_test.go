@@ -49,8 +49,8 @@ func TestListOptions(t *testing.T) {
 
 	// verify failing conversion
 	for i, failingObject := range []*metav1.ListOptions{
-		{LabelSelector: "a!!!"},
-		{FieldSelector: "a!!!"},
+		&metav1.ListOptions{LabelSelector: "a!!!"},
+		&metav1.ListOptions{FieldSelector: "a!!!"},
 	} {
 		out = &ListOptions{}
 		if err := scheme.Convert(failingObject, out, nil); err == nil {

@@ -1,4 +1,4 @@
 package: github.com/soggiest/ferrarin
 import:
 - package: k8s.io/client-go
-  version: v2.0.0-alpha.1 
+  version: 8b466d64c5da37e0d3985b907d812e1f58cb41cb 

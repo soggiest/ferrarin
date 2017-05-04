@@ -161,12 +161,11 @@ func (c *parameterCodec) DecodeParameters(parameters url.Values, from schema.Gro
 	if err != nil {
 		return err
 	}
-	for i := range targetGVKs {
-		if targetGVKs[i].GroupVersion() == from {
-			return c.convertor.Convert(&parameters, into, nil)
-		}
+	targetGVK := targetGVKs[0]
+	if targetGVK.GroupVersion() == from {
+		return c.convertor.Convert(&parameters, into, nil)
 	}
-	input, err := c.creator.New(from.WithKind(targetGVKs[0].Kind))
+	input, err := c.creator.New(from.WithKind(targetGVK.Kind))
 	if err != nil {
 		return err
 	}
@@ -195,17 +194,16 @@ func (c *parameterCodec) EncodeParameters(obj Object, to schema.GroupVersion) (u
 }
 
 type base64Serializer struct {
-	Encoder
-	Decoder
+	Serializer
 }
 
-func NewBase64Serializer(e Encoder, d Decoder) Serializer {
-	return &base64Serializer{e, d}
+func NewBase64Serializer(s Serializer) Serializer {
+	return &base64Serializer{s}
 }
 
 func (s base64Serializer) Encode(obj Object, stream io.Writer) error {
 	e := base64.NewEncoder(base64.StdEncoding, stream)
-	err := s.Encoder.Encode(obj, e)
+	err := s.Serializer.Encode(obj, e)
 	e.Close()
 	return err
 }
@@ -216,7 +214,7 @@ func (s base64Serializer) Decode(data []byte, defaults *schema.GroupVersionKind,
 	if err != nil {
 		return nil, nil, err
 	}
-	return s.Decoder.Decode(out[:n], defaults, into)
+	return s.Serializer.Decode(out[:n], defaults, into)
 }
 
 // SerializerInfoForMediaType returns the first info in types that has a matching media type (which cannot
