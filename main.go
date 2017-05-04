@@ -15,5 +15,10 @@ func main() {
       log.Fatal(err)
     }
     pods, err := client.CoreV1().ListPods(ctx, client.Namespace)
-    fmt.Printf(pods.Items.to_s)
+    if err != nil {
+      log.Fatal(err)
+    }
+    for _, pods := range pods.Items {
+      fmt.Printf("%q", *pod.Metadata.Name)
+    }
 }
