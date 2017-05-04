@@ -29,6 +29,7 @@ ferrarin: main.go
 
 container: ferrarin
 	docker build --pull -t $(PREFIX):$(TAG) .
+	push
 
 push: push
 	docker push $(PREFIX):$(TAG)
