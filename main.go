@@ -13,13 +13,11 @@ func main() {
     if err != nil {
       log.Fatal(err)
     }
-    fmt.Printf(client)
-    //
-    //    nodes, err := client.CoreV1().ListNodes(context.Background())
-    //    if err != nil {
-    //        log.Fatal(err)
-    //    }
-    //    for _, node := range nodes.Items {
-    //        fmt.Printf("name=%q schedulable=%t\n", *node.Metadata.Name, !*node.Spec.Unschedulable)
-    //    }
+    nodes, err := client.CoreV1().ListNodes(context.Background())
+    if err != nil {
+      log.Fatal(err)
+    }
+    for _, node := range nodes.Items {
+      fmt.Printf("name=%q schedulable=%t\n", *node.Metadata.Name, !*node.Spec.Unschedulable)
+    }
 }
