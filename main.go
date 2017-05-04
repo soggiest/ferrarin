@@ -14,11 +14,6 @@ func main() {
     if err != nil {
       log.Fatal(err)
     }
-    nodes, err := client.CoreV1().ListNodes(context.Background())
-    if err != nil {
-      log.Fatal(err)
-    }
-    for _, node := range nodes.Items {
-      fmt.Printf("name=%q schedulable=%t\n", *node.Metadata.Name, !*node.Spec.Unschedulable)
-    }
+    pods, err := client.CoreV1().ListPods(ctx, client.Namespace)
+    fmt.Printf(pods.first.Metadata.name)
 }
