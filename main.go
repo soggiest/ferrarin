@@ -9,7 +9,7 @@ import (
 
 func main() {
     //fmt.Printf("TEST1")
-
+    ctx := context.Background()
     client, err := k8s.NewInClusterClient()
     if err != nil {
       log.Fatal(err)
