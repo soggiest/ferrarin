@@ -15,5 +15,5 @@ func main() {
       log.Fatal(err)
     }
     pods, err := client.CoreV1().ListPods(ctx, client.Namespace)
-    fmt.Printf(pods.first.Metadata.name)
+    fmt.Printf(pods.Items)
 }
