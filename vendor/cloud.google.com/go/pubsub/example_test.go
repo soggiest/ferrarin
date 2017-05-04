@@ -20,7 +20,6 @@ import (
 
 	"cloud.google.com/go/pubsub"
 	"golang.org/x/net/context"
-	"google.golang.org/api/iterator"
 )
 
 func ExampleNewClient() {
@@ -49,6 +48,17 @@ func ExampleClient_CreateTopic() {
 	_ = topic // TODO: use the topic.
 }
 
+func ExampleClient_Topics() {
+	ctx := context.Background()
+	client, err := pubsub.NewClient(ctx, "project-id")
+	if err != nil {
+		// TODO: Handle error.
+	}
+	// List all topics.
+	it := client.Topics(ctx)
+	_ = it // See the TopicIterator example for its usage.
+}
+
 func ExampleClient_CreateSubscription() {
 	ctx := context.Background()
 	client, err := pubsub.NewClient(ctx, "project-id")
@@ -70,6 +80,17 @@ func ExampleClient_CreateSubscription() {
 	}
 
 	_ = sub // TODO: use the subscription.
+}
+
+func ExampleClient_Subscriptions() {
+	ctx := context.Background()
+	client, err := pubsub.NewClient(ctx, "project-id")
+	if err != nil {
+		// TODO: Handle error.
+	}
+	// List all subscriptions of the project.
+	it := client.Subscriptions(ctx)
+	_ = it // See the SubscriptionIterator example for its usage.
 }
 
 func ExampleTopic_Delete() {
@@ -110,20 +131,13 @@ func ExampleTopic_Publish() {
 	}
 
 	topic := client.Topic("topicName")
-	defer topic.Stop()
-	var results []*pubsub.PublishResult
-	r := topic.Publish(ctx, &pubsub.Message{
+	msgIDs, err := topic.Publish(ctx, &pubsub.Message{
 		Data: []byte("hello world"),
 	})
-	results = append(results, r)
-	// Do other work ...
-	for _, r := range results {
-		id, err := r.Get(ctx)
-		if err != nil {
-			// TODO: Handle error.
-		}
-		fmt.Printf("Published a message with a message ID: %s\n", id)
+	if err != nil {
+		// TODO: Handle error.
 	}
+	fmt.Printf("Published a message with a message ID: %s\n", msgIDs[0])
 }
 
 func ExampleTopic_Subscriptions() {
@@ -136,7 +150,7 @@ func ExampleTopic_Subscriptions() {
 	// List all subscriptions of the topic (maybe of multiple projects).
 	for subs := topic.Subscriptions(ctx); ; {
 		sub, err := subs.Next()
-		if err == iterator.Done {
+		if err == pubsub.Done {
 			break
 		}
 		if err != nil {
@@ -176,65 +190,36 @@ func ExampleSubscription_Exists() {
 	}
 }
 
-func ExampleSubscription_Config() {
+func ExampleSubscription_Pull() {
 	ctx := context.Background()
 	client, err := pubsub.NewClient(ctx, "project-id")
 	if err != nil {
 		// TODO: Handle error.
 	}
-	sub := client.Subscription("subName")
-	config, err := sub.Config(ctx)
-	if err != nil {
-		// TODO: Handle error.
-	}
-	fmt.Println(config)
-}
 
-func ExampleSubscription_Receive() {
-	ctx := context.Background()
-	client, err := pubsub.NewClient(ctx, "project-id")
+	sub := client.Subscription("subName")
+	it, err := sub.Pull(ctx)
 	if err != nil {
 		// TODO: Handle error.
 	}
-	sub := client.Subscription("subName")
-	err = sub.Receive(ctx, func(ctx context.Context, m *pubsub.Message) {
-		// TODO: Handle message.
-		// NOTE: May be called concurrently; synchronize access to shared memory.
-		m.Ack()
-	})
-	if err != context.Canceled {
-		// TODO: Handle error.
-	}
-}
 
-func ExampleSubscription_Receive_options() {
-	ctx := context.Background()
-	client, err := pubsub.NewClient(ctx, "project-id")
-	if err != nil {
-		// TODO: Handle error.
-	}
-	sub := client.Subscription("subName")
-	// This program is expected to process and acknowledge messages
-	// in 5 seconds. If not, Pub/Sub API will assume the message is not
-	// acknowledged.
-	sub.ReceiveSettings.MaxExtension = 5 * time.Second
-	err = sub.Receive(ctx, func(ctx context.Context, m *pubsub.Message) {
-		// TODO: Handle message.
-		m.Ack()
-	})
-	if err != context.Canceled {
-		// TODO: Handle error.
-	}
-}
+	// Ensure that the iterator is closed down cleanly.
+	defer it.Stop()
 
-func ExampleSubscription_ModifyPushConfig() {
-	ctx := context.Background()
-	client, err := pubsub.NewClient(ctx, "project-id")
-	if err != nil {
-		// TODO: Handle error.
-	}
-	sub := client.Subscription("subName")
-	if err := sub.ModifyPushConfig(ctx, &pubsub.PushConfig{Endpoint: "https://example.com/push"}); err != nil {
-		// TODO: Handle error.
+	// Consume 10 messages.
+	for i := 0; i < 10; i++ {
+		m, err := it.Next()
+		if err == pubsub.Done {
+			// There are no more messages.  This will happen if it.Stop is called.
+			break
+		}
+		if err != nil {
+			// TODO: Handle error.
+			break
+		}
+		fmt.Printf("message %d: %s\n", i, m.Data)
+
+		// Acknowledge the message.
+		m.Done(true)
 	}
 }
