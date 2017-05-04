@@ -8,7 +8,7 @@ import (
 )
 
 func main() {
-    fmt.printf("TEST1")
+    fmt.Printf("TEST1")
     client, err := k8s.NewInClusterClient()
     if err != nil {
         log.Fatal(err)
