@@ -15,10 +15,14 @@ notifications:
   on_success: never
   on_failure: never
 
+script:
+  - make ferrarin 
+
 after_success:
   - export COMMIT=`echo $TRAVIS_COMMIT | head -c 8`
   - export REPO=quay.io/nicholas_lane/ferrarin
   - export TAG=`if [ "$TRAVIS_BRANCH" == "master" ]; then echo "latest"; else echo $TRAVIS_BRANCH ; fi`
+  - echo $TRAVIS_BRANCH
   - docker build --pull -f Dockerfile -t $REPO:$COMMIT .
   - docker tag $REPO:$COMMIT $REPO:$TAG
-  - docker push $REPO
+  - docker push $REPO:$TAG
