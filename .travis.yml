@@ -10,7 +10,7 @@ services:
 
 before_install:
 #  - go get github.com/ericchiang/k8s
-  - glide up -v
+
 notifications:
   on_success: never
   on_failure: never
