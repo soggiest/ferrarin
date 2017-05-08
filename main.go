@@ -5,8 +5,8 @@ import (
     "fmt"
 //    "log"
 //    "github.com/ericchiang/k8s"
-    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-    "k8s.io/client-go/kubernetes"
+//    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+//    "k8s.io/client-go/kubernetes"
     "k8s.io/client-go/rest"
 )
 
@@ -17,10 +17,10 @@ func main() {
 //    panic(err.Error())
   }
   fmt.Printf(config.Host)
-  clientset, err := kubernetes.NewForConfig(config)
-  if err != nil {
+//  clientset, err := kubernetes.NewForConfig(config)
+//  if err != nil {
 //    panic(err.Error())
-  }
+//  }
 //  for {
 //    pods, err := clientset.CoreV1().Pods("").List(metav1.ListOptions{})
 //    if err != nil {
