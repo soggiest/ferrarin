@@ -23,12 +23,12 @@ func main() {
   }
   for {
     pods, err := clientset.CoreV1().Pods("").List(metav1.ListOptions{})
-    if err != nil {
+//    if err != nil {
 //      panic(err.Error())
-    }
+//    }
 //    fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
 //		time.Sleep(10 * time.Second)
-  }
+//  }
 
 //    client, err := k8s.NewInClusterClient()
 //    if err != nil {
