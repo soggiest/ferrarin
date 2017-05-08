@@ -11,10 +11,10 @@ import (
 )
 
 func main() {
-//fmt.Printf("TEST1")
+  fmt.Printf("TEST1")
   config, err := rest.InClusterConfig()
   if err != nil {
-//    panic(err.Error())
+    panic(err.Error())
   }
   fmt.Printf(config.Host)
 //  clientset, err := kubernetes.NewForConfig(config)
