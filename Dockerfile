@@ -1,5 +1,6 @@
 FROM golang:alpine
 
 ADD /bin/ferrarin /ferrarin 
-ENTRYPOINT ["/bin/sh", "/ferrarin"]
+#RUN chmod 755 /ferrarin
+ENTRYPOINT ["/ferrarin"]
 
