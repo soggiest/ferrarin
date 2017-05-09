@@ -1,5 +1,5 @@
 FROM golang:alpine
 
 ADD /bin/ferrarin /ferrarin 
-ENTRYPOINT ["/ferrarin"]
+ENTRYPOINT ["/bin/sh", "/ferrarin"]
 
