@@ -28,7 +28,7 @@ func main() {
       panic(err.Error())
     }
     fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
-		time.Sleep(10 * time.Second)
+    time.Sleep(10 * time.Second)
   }
 
 //    ctx := context.Background()

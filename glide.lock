@@ -1,5 +1,5 @@
-hash: 3ebc14330ce791dd30ffe3da9ec1ced5b6f8b3483bcbc4934329c459886037f5
-updated: 2017-05-08T19:41:29.140890341-07:00
+hash: d6fdbb428ff6655f970881d72d1506b9821254d7dd49cf057edb6c563c77875a
+updated: 2017-05-09T11:47:46.96282939-07:00
 imports:
 - name: cloud.google.com/go
   version: 3b1ae45394a234c385be014e9a488f2bb6eef821
@@ -32,7 +32,7 @@ imports:
   - digest
   - reference
 - name: github.com/emicklei/go-restful
-  version: 89ef8af493ab468a45a42bb0d89a06fccdd2fb22
+  version: 09691a3b6378b740595c1002f40c34dd5f218a22
   subpackages:
   - log
   - swagger
@@ -76,9 +76,9 @@ imports:
 - name: github.com/PuerkitoBio/urlesc
   version: 5bd2802263f21d8788851d5305584c82a5c75d7e
 - name: github.com/spf13/pflag
-  version: 5ccb023bc27df288a957c5e994cd44fd19619465
+  version: 9ff6c6923cfffbcd502984b8e0c80539a94968b7
 - name: github.com/ugorji/go
-  version: f1f1a805ed361a0e078bb537e4ea78cd37dcf065
+  version: ded73eae5db7e7a0ef6f55aace87a2873c5d2b74
   subpackages:
   - codec
 - name: golang.org/x/net
@@ -127,8 +127,9 @@ imports:
 - name: gopkg.in/yaml.v2
   version: 53feefa2559fb8dfa8d81baad31be332c97d6c77
 - name: k8s.io/apimachinery
-  version: 7080e31e90e981181435294bca96c80a37db8941
+  version: b317fa7ec8e0e7d1f77ac63bf8c3ec7b29a2a215
   subpackages:
+  - pkg/api/resource
   - pkg/apis/meta/v1
   - pkg/conversion
   - pkg/conversion/queryparams
@@ -140,6 +141,7 @@ imports:
   - pkg/selection
   - pkg/types
   - pkg/util/errors
+  - pkg/util/intstr
   - pkg/util/net
   - pkg/util/runtime
   - pkg/util/sets

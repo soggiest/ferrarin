@@ -3,4 +3,4 @@ import:
 - package: k8s.io/client-go
   version: v2.0.0 
 - package: k8s.io/apimachinery
-  version: 84c15da65eb86243c295d566203d7689cc6ac04b
+  version: b317fa7ec8e0e7d1f77ac63bf8c3ec7b29a2a215 
