@@ -7,16 +7,16 @@ import (
 //    "github.com/ericchiang/k8s"
 //    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 //    "k8s.io/client-go/kubernetes"
-    "k8s.io/client-go/rest"
+//    "k8s.io/client-go/rest"
 )
 
 func main() {
   fmt.Printf("TEST1")
-  config, err := rest.InClusterConfig()
-  if err != nil {
-    panic(err.Error())
-  }
-  fmt.Printf(config.Host)
+//  config, err := rest.InClusterConfig()
+//  if err != nil {
+//    panic(err.Error())
+//  }
+//  fmt.Printf(config.Host)
 //  clientset, err := kubernetes.NewForConfig(config)
 //  if err != nil {
 //    panic(err.Error())
