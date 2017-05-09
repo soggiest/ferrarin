@@ -6,9 +6,10 @@ import (
   "time"
 //  "log"
 //  "github.com/ericchiang/k8s"
-    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+//    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
     "k8s.io/client-go/kubernetes"
     "k8s.io/client-go/rest"
+    "k8s.io/client-go/pkg/api/v1"
 )
 
 func main() {
@@ -23,7 +24,7 @@ func main() {
     panic(err.Error())
   }
   for {
-    pods, err := clientset.CoreV1().Pods("").List(metav1.ListOptions{})
+    pods, err := clientset.Core().Pods("").List(v1.ListOptions{})
     if err != nil {
       panic(err.Error())
     }
