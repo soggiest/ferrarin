@@ -25,7 +25,7 @@ ARCH?=amd64
 TEMP_DIR:=$(shell mktemp -d)
 
 ferrarin: main.go
-	CGO_ENABLED=0 GOOS=linux GOARCH=$(ARCH) go build -o bin/ferrarin ./main.go
+        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o bin/ferrarin ./main.go	
 
 #ferrarin: main.go
 #	go build -o bin/ferrarin ./main.go
