@@ -16,7 +16,6 @@ notifications:
   on_failure: never
 
 script:
-  - make clean
   - make ferrarin 
 
 after_success:
