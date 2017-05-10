@@ -8,7 +8,7 @@ import (
    "k8s.io/client-go/kubernetes"
    "k8s.io/client-go/rest"
    "k8s.io/client-go/pkg/api/v1"
-   "github.com/nicholas_lane/ferrarin/createpod"
+//   "github.com/nicholas_lane/ferrarin/createpod"
 )
 
 func get_client() *Clientset {
