@@ -3,7 +3,7 @@ package main
 import (
   "os"
   "fmt"
-//  "time"
+  "time"
 
    "k8s.io/client-go/kubernetes"
    "k8s.io/client-go/rest"
@@ -26,9 +26,10 @@ func main() {
   fmt.Println(test1)
   if len(test1) > 0 {
     create_pods := os.Getenv("CREATE_POD")
+    fmt.Println(len(create_pods))
   }
   for {
-    fmt.Println(len(create_pods))
     fmt.Println("%v\n", client)
+    time.Sleep(5 * time.Second)
   }
 }
