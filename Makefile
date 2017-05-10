@@ -17,7 +17,7 @@
 # Usage:
 # 	[PREFIX=gcr.io/google_containers/dummy-ingress-controller] [ARCH=amd64] [TAG=1.1] make (server|container|push)
 
-all: container
+all: ferrarin 
 
 TAG?=latest
 PREFIX?=quay.io/nicholas_lane/ferrarin
@@ -29,8 +29,8 @@ ferrarin: main.go
 
 #ferrarin: main.go
 #	go build -o bin/ferrarin ./main.go
-
-container: ferrarin
+.PHONY: container
+container: build 
 	docker build --pull -t $(PREFIX):$(TAG) .
 
 .PHONY: push
