@@ -38,4 +38,5 @@ push: push
 	docker push $(PREFIX):$(TAG)
 
 clean:
+	cat main.go
 	rm -f ferrarin
