@@ -8,7 +8,7 @@ import (
    "k8s.io/client-go/kubernetes"
    "k8s.io/client-go/rest"
    "k8s.io/client-go/pkg/api/v1"
-   "github.com/nicholas_lane/ferrarin/createpod"
+//   "github.com/nicholas_lane/ferrarin/createpod"
 )
 
 func get_client() Clientset {
@@ -29,10 +29,10 @@ func main() {
 
   client := get_client()
 
-  if os.GetEnv("CREATE_POD") != nil {
-    create_pods := os.GetEnv("CREATE_POD")
+  if os.Getenv("CREATE_POD") != nil {
+    create_pods := os.Getenv("CREATE_POD")
   }
-
-  fmt.Println(client.Settings())
-
+  for {
+    fmt.Println(client.Settings())
+  }
 }

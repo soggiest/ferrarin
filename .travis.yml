@@ -9,7 +9,7 @@ services:
   - docker
 
 before_install:
-  - go get github.com/ericchiang/k8s
+        #  - go get github.com/ericchiang/k8s
 
 notifications:
   on_success: never
