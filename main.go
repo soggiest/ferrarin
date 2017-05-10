@@ -3,33 +3,42 @@ package main
 import (
   "os"
   "fmt"
-  "time"
-
+//  "time"
+  "flag"
    "k8s.io/client-go/kubernetes"
-   "k8s.io/client-go/rest"
+//   "k8s.io/client-go/rest"
+   "k8s.io/client-go/tools/clientcmd"
 //   "k8s.io/client-go/pkg/api/v1"
-//   "github.com/nicholas_lane/ferrarin/createpod"
+   "github.com/nicholas_lane/ferrarin/createpod"
+)
+
+var (
+	kubeconfig = flag.String("kubeconfig", "./config", "absolute path to the kubeconfig file")
 )
 
 func main() {
-  config, err := rest.InClusterConfig()
+//TODO: GET RID OF THE OUT OF CLUSTER CONFIG WHEN PUSHING INTO THE CLUSTER
+  flag.Parse()
+// uses the current context in kubeconfig
+  config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
   if err != nil {
     panic(err.Error())
   }
-  fmt.Printf(config.Host)
+//  config, err := rest.InClusterConfig()
+//  if err != nil {
+//    panic(err.Error())
+//  }
+  fmt.Println(config.Host)
   client, err := kubernetes.NewForConfig(config)
   if err != nil {
     panic(err.Error())
   }
-  
-  test1 := os.Getenv("CREATE_POD")
-  fmt.Println(test1)
-  if len(test1) > 0 {
-    create_pods := os.Getenv("CREATE_POD")
-    fmt.Println(len(create_pods))
-  }
-  for {
-    fmt.Println("%v\n", client)
-    time.Sleep(5 * time.Second)
+
+  create_pod := os.Getenv("CREATE_POD")
+  if len(create_pod) > 0 {
+    if create_pod == "true" {
+      //fmt.Println(len(create_pod))
+      serverDaemonSet := createpod.create_server(client)
+    }
   }
 }
