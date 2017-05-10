@@ -17,28 +17,20 @@
 # Usage:
 # 	[PREFIX=gcr.io/google_containers/dummy-ingress-controller] [ARCH=amd64] [TAG=1.1] make (server|container|push)
 
-all: ferrarin 
+all: container
 
 TAG?=latest
 PREFIX?=quay.io/nicholas_lane/ferrarin
-ARCH?=amd64
 TEMP_DIR:=$(shell mktemp -d)
 
-ferrarin: .FORCE #main.go
+ferrarin: main.go 
+        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o ferrarin main.go	
 
-.FORCE:
-        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o bin/ferrarin ./main.go	
-
-#ferrarin: main.go
-#	go build -o bin/ferrarin ./main.go
 .PHONY: container
-container: build 
+container: container 
 	docker build --pull -t $(PREFIX):$(TAG) .
 
 .PHONY: push
 push: push
 	docker push $(PREFIX):$(TAG)
 
-clean:
-	cat main.go
-	rm -f ferrarin
