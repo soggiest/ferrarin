@@ -29,6 +29,6 @@ func main() {
   }
   for {
     fmt.Println("DOES IT WORK?!")
-    fmt.Println(client.settingsv1alpha1)
+    fmt.Println("%v\n", client)
   }
 }
