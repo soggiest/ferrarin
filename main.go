@@ -17,7 +17,7 @@ func main() {
     panic(err.Error())
   }
   fmt.Printf(config.Host)
-  clientset, err := kubernetes.NewForConfig(config)
+  client, err := kubernetes.NewForConfig(config)
   if err != nil {
     panic(err.Error())
   }
