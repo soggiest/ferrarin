@@ -24,7 +24,9 @@ PREFIX?=quay.io/nicholas_lane/ferrarin
 ARCH?=amd64
 TEMP_DIR:=$(shell mktemp -d)
 
-ferrarin: main.go
+ferrarin: .FORCE #main.go
+
+.FORCE:
         CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o bin/ferrarin ./main.go	
 
 #ferrarin: main.go
