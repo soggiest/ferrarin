@@ -28,7 +28,7 @@ func main() {
     create_pods := os.Getenv("CREATE_POD")
   }
   for {
-    fmt.Println("DOES IT WORK?!")
+    fmt.Println(len(create_pods))
     fmt.Println("%v\n", client)
   }
 }
