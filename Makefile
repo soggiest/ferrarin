@@ -24,7 +24,7 @@ PREFIX?=quay.io/nicholas_lane/ferrarin
 TEMP_DIR:=$(shell mktemp -d)
 
 ferrarin: main.go 
-        CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o ferrarin main.go	
+	CGO_ENABLED=0 GOOS=linux go build -a -installsuffix cgo -ldflags '-w' -o ferrarin main.go	
 
 .PHONY: container
 container: container 
