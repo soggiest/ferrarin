@@ -11,7 +11,7 @@ import (
 //   "github.com/nicholas_lane/ferrarin/createpod"
 )
 
-func get_client() {
+func main() {
   config, err := rest.InClusterConfig()
   if err != nil {
     panic(err.Error())
@@ -21,13 +21,7 @@ func get_client() {
   if err != nil {
     panic(err.Error())
   }
-
-  return clientset
-}
-
-func main() {
-
-  client := get_client()
+  
   test1 := os.Getenv("CREATE_POD")
   fmt.Println(test1)
   if len(test1) > 0 {
