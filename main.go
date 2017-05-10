@@ -7,7 +7,7 @@ import (
 
    "k8s.io/client-go/kubernetes"
    "k8s.io/client-go/rest"
-   "k8s.io/client-go/pkg/api/v1"
+//   "k8s.io/client-go/pkg/api/v1"
 //   "github.com/nicholas_lane/ferrarin/createpod"
 )
 
