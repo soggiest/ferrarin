@@ -1,19 +1,17 @@
 package main
 
 import (
-//  "context"
+  "os"
   "fmt"
   "time"
-//  "log"
-//  "github.com/ericchiang/k8s"
-//    metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
-    "k8s.io/client-go/kubernetes"
-    "k8s.io/client-go/rest"
-    "k8s.io/client-go/pkg/api/v1"
+
+   "k8s.io/client-go/kubernetes"
+   "k8s.io/client-go/rest"
+   "k8s.io/client-go/pkg/api/v1"
+   "github.com/nicholas_lane/ferrarin/createpod"
 )
 
-func main() {
-  fmt.Printf("TEST1")
+func get_client() Clientset {
   config, err := rest.InClusterConfig()
   if err != nil {
     panic(err.Error())
@@ -23,25 +21,18 @@ func main() {
   if err != nil {
     panic(err.Error())
   }
-  for {
-    pods, err := clientset.Core().Pods("").List(v1.ListOptions{})
-    if err != nil {
-      panic(err.Error())
-    }
-    fmt.Printf("There are %d pods in the cluster\n", len(pods.Items))
-    time.Sleep(10 * time.Second)
+
+  return clientset
+}
+
+func main() {
+
+  client := get_client()
+
+  if os.GetEnv("CREATE_POD") != nil {
+    create_pods := os.GetEnv("CREATE_POD")
   }
 
-//    ctx := context.Background()
-//    client, err := k8s.NewInClusterClient()
-//    if err != nil {
-//      log.Fatal(err)
-//    }
-//    pods, err := client.CoreV1().ListPods(ctx, client.Namespace)
-//    if err != nil {
-//      log.Fatal(err)
-//    }
-//    for _, pod := range pods.Items {
-//      fmt.Printf("%q", *pod.Metadata.Name)
-//    }
+  fmt.Println(client.Settings())
+
 }
