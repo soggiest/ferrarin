@@ -1,46 +1,53 @@
 package createpod
 
 import (
-  v1beta1 "k8s.io/kubernetes/pkg/apis/extensions/v1beta1"
-  v1 "k8s.io/client-go/pkg/api/v1"
+	"fmt"
+	//	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/client-go/kubernetes"
+	v1 "k8s.io/client-go/pkg/api/v1"
+	v1beta1 "k8s.io/client-go/pkg/apis/extensions/v1beta1"
+	//"k8s.io/client-go/tools/clientcmd"
+	//"k8s.io/kubernetes/pkg/api"
+	//	"k8s.io/kubernetes/pkg/apis/extensions"
+	"k8s.io/client-go/pkg/util/intstr"
 )
 
-
-func create_server(client *kubernetes.ClientSet) (v1beta1.DaemonSet) {
-  daemonManifest := generate_server_config()
-  
-  daemonSet, err := client.ExtensionsV1beta1().DaemonSet().Create(daemonManifest)
-
-  return daemonSet
+func createServer(client *kubernetes.Clientset) *v1beta1.DaemonSet {
+	daemonSet := generateServerConfig()
+	daemonSetObject, err := client.ExtensionsV1beta1().DaemonSets().Create(daemonSet)
+	if err != nil {
+		panic(err.Error())
+	}
+	return daemonSet
 }
 
-func generate_server_config() *v1beta1.DaemonSet {
-  	labels := map[string]string{"test-pods": "server"} 
-	daemonset := &extensions.DaemonSet{
-		ObjectMeta: metav1.ObjectMeta{
-			Namespace: v1.NameSpaceDefault,
+func generateServerConfig() *v1beta1.DaemonSet {
+	labels := map[string]string{"test-pods": "server"}
+	daemonset := &v1beta1.DaemonSet{
+		ObjectMeta: v1.ObjectMeta{
+			Namespace: "default",
 			Name:      "test-pods-server",
 			Labels:    labels,
 		},
-		Spec: extensions.DaemonSetSpec{
-			Template: api.PodTemplateSpec{
-				ObjectMeta: metav1.ObjectMeta{
+		Spec: v1beta1.DaemonSetSpec{
+			Template: v1.PodTemplateSpec{
+				ObjectMeta: v1.ObjectMeta{
 					Labels: labels,
 				},
-				Spec: api.PodSpec{
-					ServiceAccountName: opts.ServiceAccount,
-					Containers: []api.Container{
+				Spec: v1.PodSpec{
+					ServiceAccountName: "default",
+					Containers: []v1.Container{
 						{
 							Name:            "server",
 							Image:           "docker/nginx",
 							ImagePullPolicy: "Always",
-							Ports: []api.ContainerPort{
+							Ports: []v1.ContainerPort{
 								{ContainerPort: 443, Name: "server-https"},
-								{ContainerPort: 80, Name: "server-http"}
+								{ContainerPort: 80, Name: "server-http"},
 							},
-							LivenessProbe: &api.Probe{
-								Handler: api.Handler{
-									HTTPGet: &api.HTTPGetAction{
+							LivenessProbe: &v1.Probe{
+								Handler: v1.Handler{
+									HTTPGet: &v1.HTTPGetAction{
 										Path: "/liveness",
 										Port: intstr.FromInt(80),
 									},
@@ -48,9 +55,9 @@ func generate_server_config() *v1beta1.DaemonSet {
 								InitialDelaySeconds: 1,
 								TimeoutSeconds:      1,
 							},
-							ReadinessProbe: &api.Probe{
-								Handler: api.Handler{
-									HTTPGet: &api.HTTPGetAction{
+							ReadinessProbe: &v1.Probe{
+								Handler: v1.Handler{
+									HTTPGet: &v1.HTTPGetAction{
 										Path: "/readiness",
 										Port: intstr.FromInt(80),
 									},
@@ -67,4 +74,3 @@ func generate_server_config() *v1beta1.DaemonSet {
 
 	return daemonset
 }
-

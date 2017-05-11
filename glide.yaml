@@ -2,5 +2,5 @@ package: github.com/soggiest/ferrarin
 import:
 - package: k8s.io/client-go
   version: v2.0.0
-  #- package: k8s.io/apimachinery
-  #  version: b317fa7ec8e0e7d1f77ac63bf8c3ec7b29a2a215 
+- package: k8s.io/kubernetes
+  version: ~1.5.0

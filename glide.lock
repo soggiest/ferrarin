@@ -1,5 +1,5 @@
-hash: 3ebc14330ce791dd30ffe3da9ec1ced5b6f8b3483bcbc4934329c459886037f5
-updated: 2017-05-10T11:07:18.39876309-07:00
+hash: 5e9d8095ffe07c387db7e4a3d03467c86588a4a4ca55674f73358c39fcf6e47a
+updated: 2017-05-10T16:35:29.026646031-07:00
 imports:
 - name: cloud.google.com/go
   version: 3b1ae45394a234c385be014e9a488f2bb6eef821
@@ -251,4 +251,51 @@ imports:
   - tools/clientcmd/api/v1
   - tools/metrics
   - transport
+- name: k8s.io/kubernetes
+  version: f07eea23494be1e7c11a8e2cf51bd96d1ec9fdf1
+  subpackages:
+  - pkg/api
+  - pkg/api/meta
+  - pkg/api/meta/metatypes
+  - pkg/api/resource
+  - pkg/api/unversioned
+  - pkg/api/v1
+  - pkg/apis/autoscaling
+  - pkg/apis/batch
+  - pkg/apis/extensions
+  - pkg/apis/extensions/v1beta1
+  - pkg/auth/user
+  - pkg/conversion
+  - pkg/conversion/queryparams
+  - pkg/fields
+  - pkg/genericapiserver/openapi/common
+  - pkg/labels
+  - pkg/runtime
+  - pkg/runtime/serializer
+  - pkg/runtime/serializer/json
+  - pkg/runtime/serializer/protobuf
+  - pkg/runtime/serializer/recognizer
+  - pkg/runtime/serializer/streaming
+  - pkg/runtime/serializer/versioning
+  - pkg/selection
+  - pkg/types
+  - pkg/util
+  - pkg/util/errors
+  - pkg/util/framer
+  - pkg/util/intstr
+  - pkg/util/json
+  - pkg/util/labels
+  - pkg/util/net
+  - pkg/util/parsers
+  - pkg/util/rand
+  - pkg/util/runtime
+  - pkg/util/sets
+  - pkg/util/uuid
+  - pkg/util/validation
+  - pkg/util/validation/field
+  - pkg/util/wait
+  - pkg/util/yaml
+  - pkg/watch
+  - pkg/watch/versioned
+  - third_party/forked/golang/reflect
 testImports: []
