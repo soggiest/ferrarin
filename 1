@@ -43,7 +43,6 @@ func CreateServer(client *kubernetes.Clientset) *v1beta1.DaemonSet {
 			panic(err.Error())
 		}
 		//fmt.Println("%v - %v\n", dsGet.Status.NumberReady, dsGet.Status.DesiredNumberScheduled)
-		//TODO: FIGURE OUT DSGET BASED FOR LOOP WHERE IT CHECKS DAEMONSTATE STATUS EACH RUN
 		for dsGet.Status.NumberReady < dsGet.Status.DesiredNumberScheduled {
 			fmt.Printf("%d is less than desired number of %d\n", dsGet.Status.NumberReady, dsGet.Status.DesiredNumberScheduled)
 			lo := v1.ListOptions{LabelSelector: "test-pods"}
