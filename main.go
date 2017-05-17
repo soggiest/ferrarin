@@ -14,6 +14,9 @@ import (
 	//v1 "k8s.io/client-go/pkg/api/v1"
 )
 
+//TODO: TIMEOUT FOR CREATEPOD CHECK
+//TODO: INTEGRATE PROMETHEUS SCRAPING
+
 var (
 	kubeconfig = flag.String("kubeconfig", "./config", "absolute path to the kubeconfig file")
 )

@@ -15,8 +15,8 @@ import (
 
 func CreateServer(client *kubernetes.Clientset) *v1beta1.DaemonSet {
 	// Check whether the test pods daemonset already exists, and if it does clean it up before proceeding.
-	dsCheck, _  := client.ExtensionsV1beta1().DaemonSets("default").Get("test-pods-server")
-	if len(dsCheck.ObjectMeta.Name) > 0  {
+	dsCheck, _ := client.ExtensionsV1beta1().DaemonSets("default").Get("test-pods-server")
+	if len(dsCheck.ObjectMeta.Name) > 0 {
 		fmt.Println("Test Pods DaemonSet already exists, removing it")
 		//deleteOptions := v1.DeleteOptions{GracePeriodSeconds: new(int64)
 		err := client.ExtensionsV1beta1().DaemonSets("default").Delete("test-pods-server", &v1.DeleteOptions{GracePeriodSeconds: new(int64)})
@@ -36,35 +36,29 @@ func CreateServer(client *kubernetes.Clientset) *v1beta1.DaemonSet {
 		//TODO: Figure out how to better handle certain errors, such as "unexpected EOF"
 		panic(err.Error())
 	}
-	time.Sleep(1 * time.Second)
-	
-		dsGet, err := client.ExtensionsV1beta1().DaemonSets("default").Get("test-pods-server")
+	time.Sleep(1 * time.Minute)
+
+	dsGet, err := client.ExtensionsV1beta1().DaemonSets("default").Get("test-pods-server")
+
+	if dsGet.Status.NumberReady < dsGet.Status.DesiredNumberScheduled {
+		fmt.Printf("%d is less than desired number of %d\n", dsGet.Status.NumberReady, dsGet.Status.DesiredNumberScheduled)
+		lo := v1.ListOptions{LabelSelector: "test-pods"}
+		pods, err := client.CoreV1().Pods("default").List(lo)
 		if err != nil {
 			panic(err.Error())
 		}
-		//fmt.Println("%v - %v\n", dsGet.Status.NumberReady, dsGet.Status.DesiredNumberScheduled)
-		//TODO: FIGURE OUT DSGET BASED FOR LOOP WHERE IT CHECKS DAEMONSTATE STATUS EACH RUN
-		for dsGet.Status.NumberReady < dsGet.Status.DesiredNumberScheduled {
-			fmt.Printf("%d is less than desired number of %d\n", dsGet.Status.NumberReady, dsGet.Status.DesiredNumberScheduled)
-			lo := v1.ListOptions{LabelSelector: "test-pods"}
-			pods, err := client.CoreV1().Pods("default").List(lo)
-			if err != nil {
-				panic(err.Error())
-			}
-			//TODO: This part didn't seem to display, anything?
-			for _, pod := range pods.Items {
-				//if pod.Status.Phase != "Running" {	
-					for _, conditions := range pod.Status.Conditions {
-						//fmt.Printf("%+v\n\n", pod)
-						if conditions.Type == "Ready" && conditions.Status == "False" {
-							fmt.Printf("%s is failing its readiness check\n", pod.ObjectMeta.Name)
-						}
+		for _, pod := range pods.Items {
+			if pod.Status.Phase == "Pending" {
+				fmt.Printf("%s is stuck in a pending state, check either Docker daemon orKubelet on %s\n", pod.ObjectMeta.Name, pod.Spec.NodeName)
+			} else {
+				for _, conditions := range pod.Status.Conditions {
+					if conditions.Type == "Ready" && conditions.Status == "False" {
+						fmt.Printf("%s is failing its readiness check\n", pod.ObjectMeta.Name)
 					}
-				//}
+				}
 			}
-			//			fmt.Printf("%+v\n", dsGet)
 		}
-	//}
+	}
 
 	return daemonSetObject
 }
