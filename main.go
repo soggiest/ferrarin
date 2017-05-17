@@ -10,7 +10,7 @@ import (
 	//   "k8s.io/client-go/rest"
 	"k8s.io/client-go/tools/clientcmd"
 	//   "k8s.io/client-go/pkg/api/v1"
-	"github.com/soggiest/ferrarin/createpod"
+	"github.com/soggiest/ferrarin/tests/createpod"
 	//v1 "k8s.io/client-go/pkg/api/v1"
 )
 
