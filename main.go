@@ -1,7 +1,6 @@
 package main
 
 import (
-	"err"
 	"fmt"
 	"os"
 	//  "time"
@@ -40,15 +39,15 @@ func main() {
 	// uses the current context in kubeconfig
 	//	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
 	//	if err != nil {
-	panic(err.Error())
+	panic(err)
 	//	}
 	config, err := rest.InClusterConfig()
 	if err != nil {
-		panic(err.Error())
+		panic(err)
 	}
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
-		panic(err.Error())
+		panic(err)
 	}
 
 	if len(createPod) != 0 {
