@@ -7,7 +7,7 @@ import (
 	"flag"
 	"github.com/golang/glog"
 	"k8s.io/client-go/kubernetes"
-	//   "k8s.io/client-go/rest"
+	"k8s.io/client-go/rest"
 	//	"k8s.io/client-go/tools/clientcmd"
 	//   "k8s.io/client-go/pkg/api/v1"
 	"github.com/soggiest/ferrarin/createpod"
@@ -39,7 +39,7 @@ func main() {
 	// uses the current context in kubeconfig
 	//	config, err := clientcmd.BuildConfigFromFlags("", *kubeconfig)
 	//	if err != nil {
-	panic(err)
+	//		panic(err)
 	//	}
 	config, err := rest.InClusterConfig()
 	if err != nil {
