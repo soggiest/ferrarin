@@ -2,6 +2,8 @@
 
 The purpose of this tool is to test the basic functionality of a Kubernetes Cluster. Results of the test will be sent to STDOUT.
 
+This tool is still in it's fledgling stages, it is highly unstable.
+
 ## Tests Available
 
 * Create Pods on each nodes
