@@ -3,11 +3,8 @@ package createpod
 import (
 	"fmt"
 	v1alpha1 "github.com/coreos/prometheus-operator/pkg/client/monitoring/v1alpha1"
-	//"k8s.io/client-go/kubernetes"
-	v1 "k8s.io/client-go/pkg/api/v1"
-	//v1beta1 "k8s.io/client-go/pkg/apis/extensions/v1beta1"
-	//"k8s.io/client-go/pkg/util/intstr"
 	"k8s.io/client-go/pkg/api/unversioned"
+	v1 "k8s.io/client-go/pkg/api/v1"
 	"k8s.io/client-go/rest"
 )
 

@@ -1,14 +1,14 @@
 package main
 
 import (
-	"flag"
 	"fmt"
+	"os"
+	"flag"
 	"github.com/golang/glog"
-	"github.com/soggiest/ferrarin/createpod"
-	"github.com/soggiest/ferrarin/networktest"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/rest"
-	"os"
+	"github.com/soggiest/ferrarin/createpod"
+	"github.com/soggiest/ferrarin/networktest"
 )
 
 //TODO: TIMEOUT FOR CREATEPOD CHECK

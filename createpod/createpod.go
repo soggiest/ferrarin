@@ -10,22 +10,6 @@ import (
 )
 
 func CreateServer(client *kubernetes.Clientset) *v1beta1.DaemonSet {
-	// Check whether the test pods daemonset already exists, and if it does clean it up before proceeding.
-	//	dsCheck, _ := client.ExtensionsV1beta1().DaemonSets("default").Get("test-pods-server")
-	//	if len(dsCheck.ObjectMeta.Name) > 0 {
-	//		fmt.Println("Test Pods DaemonSet already exists, removing it")
-	//		//deleteOptions := v1.DeleteOptions{GracePeriodSeconds: new(int64)
-	//		err := client.ExtensionsV1beta1().DaemonSets("default").Delete("test-pods-server", &v1.DeleteOptions{GracePeriodSeconds: new(int64)})
-	//		delList := v1.ListOptions{LabelSelector: "test-pods"}
-	//		delPods, _ := client.CoreV1().Pods("default").List(delList)
-	//		for _, delPod := range delPods.Items {
-	//			client.CoreV1().Pods("default").Delete(delPod.ObjectMeta.Name, &v1.DeleteOptions{GracePeriodSeconds: new(int64)})
-	//		}
-	//		time.Sleep(10 * time.Second)
-	//		if err != nil {
-	//			panic(err.Error())
-	//		}
-	//	}
 	daemonSet := generateServerConfig()
 	daemonSetObject, err := client.ExtensionsV1beta1().DaemonSets("default").Create(daemonSet)
 	if err != nil {
